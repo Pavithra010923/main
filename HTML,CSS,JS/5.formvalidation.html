@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form with Card Validation</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    input, button { padding: 10px; margin-bottom: 10px; width: 300px; }
+    .error { color: red; font-size: 14px; }
+  </style>
+</head>
+<body>
+
+  <h2>Checkout Form</h2>
+  <form onsubmit="return validateForm()">
+    <input type="text" id="name" placeholder="Enter your name"><br>
+    <div id="nameError" class="error"></div>
+
+    <input type="text" id="email" placeholder="Enter your email"><br>
+    <div id="emailError" class="error"></div>
+
+    <input type="text" id="card" placeholder="Enter 16-digit card number"><br>
+    <div id="cardError" class="error"></div>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    function validateForm() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const card = document.getElementById('card').value.trim();
+      let valid = true;
+
+      // Clear old errors
+      document.getElementById('nameError').textContent = '';
+      document.getElementById('emailError').textContent = '';
+      document.getElementById('cardError').textContent = '';
+
+      // Name check
+      if (name === '') {
+        document.getElementById('nameError').textContent = 'Name is required.';
+        valid = false;
+      }
+
+      // Email check
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        document.getElementById('emailError').textContent = 'Enter a valid email.';
+        valid = false;
+      }
+
+      // Card number check
+      const cardPattern = /^[0-9]{16}$/;
+      if (!cardPattern.test(card)) {
+        document.getElementById('cardError').textContent = 'Card number must be 16 digits.';
+        valid = false;
+      }
+
+      if (valid) {
+        alert('Form submitted successfully!');
+      }
+
+      return valid;
+    }
+  </script>
+
+</body>
+</html>

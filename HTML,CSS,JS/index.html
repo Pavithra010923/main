@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Single Page Shop</title>
+  <link rel="stylesheet" href="assets/CSS/style.css" />
+</head>
+<body>
+
+<header>
+  <h2>🛍️ My Store</h2>
+  <input type="text" id="searchInput" placeholder="Search...">
+  <div>
+    <button onclick="toggleView()">🛒 View Cart (<span id="cartCount">0</span>)</button>
+    <button id="closeCartBtn" onclick="toggleView()">❌</button>
+  </div>
+</header>
+
+<!-- Product List Page -->
+<main id="productPage"></main>
+
+<!-- Cart Page -->
+<main id="cartPage"></main>
+
+<script src="assets/JS/script.js"></script>
+  
+
+
+</body>
+</html>

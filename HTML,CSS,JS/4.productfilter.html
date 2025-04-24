@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Price Filter</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .product { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; }
+    .filter { margin-bottom: 20px; }
+    .filter input { width: 80px; margin-right: 10px; }
+  </style>
+</head>
+<body>
+
+  <h2>Filter Products by Price</h2>
+  <div class="filter">
+    Min Price: <input type="number" id="minPrice" placeholder="0">
+    Max Price: <input type="number" id="maxPrice" placeholder="1000">
+    <button onclick="filterProducts()">Filter</button>
+    <button onclick="resetFilter()">Reset</button>
+  </div>
+
+  <div id="product-list"></div>
+
+  <script>
+    const products = [
+      { id: 1, name: 'Laptop', price: 1000 },
+      { id: 2, name: 'Phone', price: 500 },
+      { id: 3, name: 'Headphones', price: 150 },
+      { id: 4, name: 'Smartwatch', price: 250 },
+      { id: 5, name: 'Monitor', price: 300 }
+    ];
+
+    function renderProducts(list) {
+      const productList = document.getElementById('product-list');
+      productList.innerHTML = '';
+      if (list.length === 0) {
+        productList.innerHTML = '<p>No products found in this price range.</p>';
+        return;
+      }
+      list.forEach(product => {
+        const div = document.createElement('div');
+        div.className = 'product';
+        div.innerHTML = `${product.name} - ₹${product.price}`;
+        productList.appendChild(div);
+      });
+    }
+
+    function filterProducts() {
+      const min = parseFloat(document.getElementById('minPrice').value) || 0;
+      const max = parseFloat(document.getElementById('maxPrice').value) || Infinity;
+
+      const filtered = products.filter(p => p.price >= min && p.price <= max);
+      renderProducts(filtered);
+    }
+
+    function resetFilter() {
+      document.getElementById('minPrice').value = '';
+      document.getElementById('maxPrice').value = '';
+      renderProducts(products);
+    }
+
+    renderProducts(products);
+  </script>
+
+</body>
+</html>
